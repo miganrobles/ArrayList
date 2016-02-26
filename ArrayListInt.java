@@ -39,21 +39,17 @@ public class ArrayListInt
      */
     public void add(int index, int elemento)
     {
-        if (index >= 0 && index <= size()) {
+        if (index >= 0 && index <= numeros.length) {
             int numeros2[] = numeros;
-            int indice1 = 0;
             numeros = new int[numeros.length + 1];
-            for (int indice = 0; indice < numeros2.length; indice++) {
-                if (indice == index) {
-                    numeros[indice1] = elemento;
+            int indice1 = 0;
+            numeros[index] = elemento;
+            for (int indice = 0; indice < numeros.length; indice++) {
+                if (!(indice == index)) {
+                    numeros[indice] = numeros2[indice1];
                     indice1++;
                 }
-                else {
-                    numeros[indice1] = numeros2[indice];
-                }
-                indice1++;
             }
-            // numeros[numeros.length - 1] = elemento;
         }
     }
 
@@ -74,8 +70,7 @@ public class ArrayListInt
     {
         boolean encontrado = false;
         int index = 0;
-        int cantidadElementos = size();
-        while (index < cantidadElementos && !encontrado) {
+        while (index < numeros.length && !encontrado) {
             if (numeros[index] == elemento) {
                 encontrado = true;
             }
@@ -90,7 +85,7 @@ public class ArrayListInt
     public int get(int index) 
     {
         int valor = -1;
-        if (index >= 0 && index < size()) {
+        if (index >= 0 && index < numeros.length) {
             valor = numeros[index];
         }
         return valor;
@@ -102,7 +97,7 @@ public class ArrayListInt
      */
     public void set(int index, int element)
     {
-        if (index >= 0 && index < size()) {
+        if (index >= 0 && index < numeros.length) {
             numeros[index] = element;
         }
     }
@@ -116,8 +111,7 @@ public class ArrayListInt
         boolean encontrado = false;
         int index = 0;
         int indice = -1;
-        int cantidadElementos = size();
-        while (index < cantidadElementos && !encontrado) {
+        while (index < numeros.length && !encontrado) {
             if (numeros[index] == elemento) {
                 encontrado = true;
                 indice = index;
@@ -132,7 +126,7 @@ public class ArrayListInt
      */
     public boolean isEmpty()
     {
-        return (size() > 0);
+        return !((size() > 0));
     }
 
     /**
@@ -142,23 +136,19 @@ public class ArrayListInt
     public int remove (int index)
     {
         int valor = -1;
-        if (contains(index)) {
+        if (index >= 0 && index < numeros.length) {
             valor = numeros[index];
             int numeros2[] = numeros;
             int indice1 = 0;
             numeros = new int[numeros.length - 1];
-            for (int indice = 0; indice -1 < numeros2.length; indice++) {
-                numeros[indice] = numeros2[indice];
-                if (indice == index) {
-                    indice++;
-                }
-                else {
+            for (int indice = 0; indice < numeros2.length; indice++) {
+                if (!(indice == index)) {
                     numeros[indice1] = numeros2[indice];
                     indice1++;
-                }               
-            }
+                }
+            }              
         }
-        return valor;   
+        return valor;
     }
 
     /**
@@ -168,5 +158,4 @@ public class ArrayListInt
     {
         return numeros.length;
     }
-
 }
